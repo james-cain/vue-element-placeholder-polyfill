@@ -2,15 +2,16 @@ import IEVersion from './utils';
 
 export default {
   bind(el, binding, vnode) {
-    let placeholder = '';
-    const exp = binding.value.placeholder;
+    let placeholderVal = '';
+    const placeholder = binding.value.placeholder;
+    const model = binding.value.model;
     if (IEVersion() === 9) {
       const childNodes = vnode.elm.children;
       Object.keys(childNodes).forEach((e) => {
         const child = childNodes[e];
         if (child) {
           if (child.nodeName === 'INPUT') {
-            placeholder = exp;
+            placeholderVal = placeholder;
             child.style.color = '#ccc';
             if (child.type !== 'text') {
               child.dataType = child.type;
@@ -19,7 +20,7 @@ export default {
           }
         }
       });
-      vnode.context.initInputIE9(binding.arg, placeholder);
+      vnode.context.initInputIE9(model, placeholderVal);
     }
   },
 };

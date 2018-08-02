@@ -13,5 +13,5 @@ export default function IEVersion() {
   } else if (isIE11) {
     return 11;
   }
-  return -1;
+  return 9;
 }

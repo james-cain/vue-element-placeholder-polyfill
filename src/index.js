@@ -6,9 +6,9 @@ export default {
     inputie9,
   },
   methods: {
-    inputFocus(name, placeholder) {
+    inputFocus(ref, model, placeholder) {
       if (IEVersion() === 9) {
-        const nodes = this.$refs[name].$vnode;
+        const nodes = this.$refs[ref].$vnode;
         const childNodes = Array.prototype.slice.call(nodes.elm.children);
         Object.keys(childNodes).forEach((e) => {
           const child = childNodes[e];
@@ -21,19 +21,19 @@ export default {
             }
           }
         });
-        if (this[name] === placeholder) this[name] = '';
+        if (this.getTraverseModel(model) === placeholder) this.setTraverseModel(model, '');
       }
     },
-    inputBlur(name, placeholder) {
+    inputBlur(ref, model, placeholder) {
       if (IEVersion() === 9) {
-        const nodes = this.$refs[name].$vnode;
+        const nodes = this.$refs[ref].$vnode;
         const childNodes = nodes.elm.children;
         Object.keys(childNodes).forEach((e) => {
           const child = childNodes[e];
           if (child) {
             if (child.nodeName === 'INPUT') {
-              if (this[name] === '') {
-                if (child.type !== 'text' && this[name] === '') {
+              if (this.getTraverseModel(model) === '') {
+                if (child.type !== 'text' && this.getTraverseModel(model) === '') {
                   child.dataType = child.type;
                   child.type = 'text';
                 }
@@ -42,13 +42,32 @@ export default {
             }
           }
         });
-        if (this[name] === '') this[name] = placeholder;
+        if (this.getTraverseModel(model) === '') this.setTraverseModel(model, placeholder);
       }
     },
-    initInputIE9(name, placeholder) {
+    initInputIE9(model, placeholder) {
       if (IEVersion() === 9) {
-        this[name] = placeholder;
+        this.setTraverseModel(model, placeholder);
       }
+    },
+    setTraverseModel(model, placeholder) {
+      let val = this;
+      const modelArr = model.split('.');
+      modelArr.forEach((k, i) => {
+        if (i < modelArr.length - 1) {
+          val = val[k];
+        } else {
+          val[k] = placeholder;
+        }
+      });
+    },
+    getTraverseModel(model) {
+      let val = this;
+      const modelArr = model.split('.');
+      modelArr.forEach((k) => {
+        val = val[k];
+      });
+      return val;
     },
   },
 };

@@ -13,45 +13,48 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
-    <div id="app">
-      <el-input
-        class="account-input"
-        v-model="userName"
-        ref="userName"
-        placeholder="请输入账号"
-        @focus="inputFocus('userName', '请输入账号')"
-        @blur="inputBlur('userName', '请输入账号')"
-        v-inputie9:userName="{placeholder: '请输入账号'}">
-      </el-input>
-      <el-input
-        class="account-input"
-        v-model="password"
-        ref="password"
-        type="password"
-        placeholder="请输入密码"
-        @focus="inputFocus('password', '请输入密码')"
-        @blur="inputBlur('password', '请输入密码')"
-        v-inputie9:password="{placeholder: '请输入密码'}">
-      </el-input>
-    </div>
-    <script src="./ie9-oninput-polyfill.js"></script>
-    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="../dist/js/vue-element-placeholder-polyfill.min.js"></script>
-    <script type="module">
-      var main = {
-        data() {
-          return {
+  <div id="app">
+    <el-input
+      class="account-input"
+      v-model="form.userName"
+      ref="userNameRef"
+      placeholder="请输入账号"
+      @focus="inputFocus('userNameRef', 'form.userName', '请输入账号')"
+      @blur="inputBlur('userNameRef', 'form.userName', '请输入账号')"
+      v-inputie9="{placeholder: '请输入账号', ref:'userNameRef', model:'form.userName'}">
+    </el-input>
+    <el-input
+      class="account-input"
+      v-model="password"
+      ref="passwordRef"
+      type="password"
+      placeholder="请输入密码"
+      @focus="inputFocus('passwordRef', 'password', '请输入密码')"
+      @blur="inputBlur('passwordRef', 'password', '请输入密码')"
+      v-inputie9="{placeholder: '请输入密码', ref:'passwordRef', model:'password'}">
+    </el-input>
+    form.userName: {{form.userName}} - password {{password}}
+  </div>
+  <script src="./ie9-oninput-polyfill.js"></script>
+  <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="../dist/js/vue-element-placeholder-polyfill.min.js"></script>
+  <script type="module">
+    var main = {
+      data() {
+        return {
+          form: {
             userName: '',
-            password: '',
-          };
-        },
-        mixins: [
-          inputie9Mixins.default,
-        ],
-      };
-      var InputIE9 = Vue.extend(main);
-      new InputIE9().$mount('#app');
-    </script>
+          },
+          password: '',
+        };
+      },
+      mixins: [
+        inputie9Mixins.default,
+      ],
+    };
+    var InputIE9 = Vue.extend(main);
+    new InputIE9().$mount('#app');
+  </script>
 </body>
 </html>

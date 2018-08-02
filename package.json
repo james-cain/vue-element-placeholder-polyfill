@@ -1,6 +1,6 @@
 {
   "name": "vue-element-placeholder-polyfill",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "A vue polyfill using element-ui support IE9",
   "main": "dist/vue-element-placeholder-polyfill.min.js",
   "devDependencies": {
