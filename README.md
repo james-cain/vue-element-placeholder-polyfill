@@ -13,13 +13,13 @@
 npm install vue-element-placeholder-polyfill
 ```
 
-####使用：
+#### 使用
 
 ##### 使用前提
 
 > 需要引入vue、elementui及src中的ie9-oninput-polyfill.js
 
-#####引入
+##### 引入
 
 - 全局引入，全局暴露inputie9Mixins对象（实际上不能这么使用，ie9并不支持module模式）
 
@@ -71,6 +71,8 @@ export default {
 - model: 与v-model绑定的元素一致。如，登录用户 在data定义为form.userName，该值填form.userName
 - placeholder 填写需要提示的标语
 
+
+
 #####inputBlur(ref, model, placeholder)
 
 - 属性值和inputFocus一致
@@ -86,7 +88,7 @@ export default {
 
 ```
 <el-input
-    v-model="userName"
+    v-model="form.userName"
     ref="userNameRef"
     placeholder="请输入账号"
     @focus="inputFocus('userNameRef', 'form.userName', '请输入账号')"
