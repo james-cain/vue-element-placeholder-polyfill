@@ -5,7 +5,7 @@
 - 该组件不包含vue、ElementUI，因此使用时必须提前导入二者
 - src中的ie9-oninput-polyfill.js需要提前引入。无论是通过外链方式，还是通过import方式，都行。
 - 支持外部引入Vue和ElementUI以及dist中的压缩js，全局变量inputie9Mixins混合到组件中使用。
-- 组件体积2.79kb，gzip后1.07kb
+- 组件体积3.11kb，gzip后1.16kb
 
 #### Install
 
