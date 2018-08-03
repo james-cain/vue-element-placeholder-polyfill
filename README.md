@@ -105,10 +105,17 @@ export default {
 #### 暂时支持
 
 - input 输入框
+- timepicker时间选择器简单模式
+- datepicker日期选择器简单模式
+- datetimepicker日期时间选择器简单模式
 
 #### 暂不支持
 
 - select选择器
+
+#### 不会支持
+
+- select多选选择器
 - cascader级联选择器
 - timepicker时间选择器中的任意时间范围方式
 - datepicker日期选择器中的任意时间范围方式

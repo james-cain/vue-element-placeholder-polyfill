@@ -10,6 +10,7 @@ export default {
       if (IEVersion() === 9) {
         const nodes = this.$refs[ref].$vnode;
         const childNodes = Array.prototype.slice.call(nodes.elm.children);
+        console.log(childNodes);
         this.setClearStyle(childNodes);
         if (this.getTraverseModel(model) === placeholder) this.setTraverseModel(model, '');
       }
@@ -18,7 +19,8 @@ export default {
       if (IEVersion() === 9) {
         const nodes = this.$refs[ref].$vnode;
         const childNodes = nodes.elm.children;
-        this.setFillStyle(childNodes);
+        console.log(childNodes);
+        this.setFillStyle(childNodes, model);
         if (this.getTraverseModel(model) === '') this.setTraverseModel(model, placeholder);
       }
     },
@@ -40,7 +42,7 @@ export default {
         }
       });
     },
-    setFillStyle(childNodes) {
+    setFillStyle(childNodes, model) {
       Object.keys(childNodes).forEach((e) => {
         const child = childNodes[e];
         if (child) {
@@ -74,6 +76,14 @@ export default {
         val = val[k];
       });
       return val;
+    },
+    getElmType(vnode) {
+      const elm = vnode.elm;
+      let type = '';
+      ['el-input', 'el-select'].forEach((e) => {
+        if (elm.match(e) && elm.match(e).length >= 0) type = e;
+      })
+      return type;
     },
   },
 };
