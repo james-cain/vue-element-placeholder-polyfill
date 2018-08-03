@@ -10,17 +10,7 @@ export default {
       if (IEVersion() === 9) {
         const nodes = this.$refs[ref].$vnode;
         const childNodes = Array.prototype.slice.call(nodes.elm.children);
-        Object.keys(childNodes).forEach((e) => {
-          const child = childNodes[e];
-          if (child) {
-            if (child.nodeName === 'INPUT') {
-              if (child.dataType && child.dataType !== 'text') {
-                child.type = child.dataType;
-              }
-              child.style.color = '#606266';
-            }
-          }
-        });
+        this.setClearStyle(childNodes);
         if (this.getTraverseModel(model) === placeholder) this.setTraverseModel(model, '');
       }
     },
@@ -28,20 +18,7 @@ export default {
       if (IEVersion() === 9) {
         const nodes = this.$refs[ref].$vnode;
         const childNodes = nodes.elm.children;
-        Object.keys(childNodes).forEach((e) => {
-          const child = childNodes[e];
-          if (child) {
-            if (child.nodeName === 'INPUT') {
-              if (this.getTraverseModel(model) === '') {
-                if (child.type !== 'text' && this.getTraverseModel(model) === '') {
-                  child.dataType = child.type;
-                  child.type = 'text';
-                }
-                child.style.color = '#ccc';
-              }
-            }
-          }
-        });
+        this.setFillStyle(childNodes);
         if (this.getTraverseModel(model) === '') this.setTraverseModel(model, placeholder);
       }
     },
@@ -49,6 +26,35 @@ export default {
       if (IEVersion() === 9) {
         this.setTraverseModel(model, placeholder);
       }
+    },
+    setClearStyle(childNodes) {
+      Object.keys(childNodes).forEach((e) => {
+        const child = childNodes[e];
+        if (child) {
+          if (child.nodeName === 'INPUT') {
+            if (child.dataType && child.dataType !== 'text') {
+              child.type = child.dataType;
+            }
+            child.style.color = '#606266';
+          }
+        }
+      });
+    },
+    setFillStyle(childNodes) {
+      Object.keys(childNodes).forEach((e) => {
+        const child = childNodes[e];
+        if (child) {
+          if (child.nodeName === 'INPUT') {
+            if (this.getTraverseModel(model) === '') {
+              if (child.type !== 'text' && this.getTraverseModel(model) === '') {
+                child.dataType = child.type;
+                child.type = 'text';
+              }
+              child.style.color = '#ccc';
+            }
+          }
+        }
+      });
     },
     setTraverseModel(model, placeholder) {
       let val = this;
